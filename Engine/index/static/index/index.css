@@ -91,6 +91,13 @@ img {
     }
 }
 
+#title {
+    background-color: var(--Primary);
+    margin: 1rem;
+    margin-bottom: 0;
+    padding: 1rem;
+}
+
 #possible-winner {
     display: flex;
     flex-direction: column;
