@@ -15,6 +15,5 @@ def translate(text: str) -> str:
     if text.strip() == '':
         raise TypeError("Text is required to translate")
 
-    translator: Translator = Translator()
-    translated_object = translator.translate(text, dest='en')
+    translated_object = Translator().translate(text, dest='en')
     return translated_object.text

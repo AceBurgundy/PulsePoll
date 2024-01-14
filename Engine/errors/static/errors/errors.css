@@ -1,13 +1,13 @@
-@import "/static/root.css";
+@import "../../../static/root.css";
 
 main {
-    background-color: var(--background);
+    background-color: var(--Background);
     display: flex;
     width: 100vw;
 }
 
 #main-container {
-    width: 50%;
+    width: 45%;
     height: 100dvh;
     display: flex;
     align-items: flex-start;
@@ -26,7 +26,7 @@ main {
 }
 
 #error-title {
-    font-size: 5vw;
+    font-size: 4.5vw;
 }
 
 #error-message, #error-title {
@@ -44,17 +44,8 @@ main {
     font-size: 25vw;
 }
 
-#return-button {
-    margin-top: 1em;    
-    font-size: 1.2rem;
-    border: none;
-    background-color: var(--primary);
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 @media screen and (orientation: portrait) {
-    
+
     main {
         flex-direction: column-reverse;
         height: 100dvh;
@@ -87,9 +78,9 @@ main {
         width: 95%;
     }
 
-        
+
     #error-number {
-        font-size: 50vw;
+        font-size: 45vw;
     }
 
 }

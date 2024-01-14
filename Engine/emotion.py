@@ -1,6 +1,5 @@
 from textblob import TextBlob
 
-
 POSITIVE: str = "POSITIVE"
 NEGATIVE: str = "NEGATIVE"
 NEUTRAL: str = "NEUTRAL"
@@ -15,7 +14,7 @@ def get_emotion(text: str):
 
     Returns:
     --------
-        - str: POSITIVE or NEGATIVE or NEUTRAL
+        - (str) = POSITIVE or NEGATIVE or NEUTRAL
     """
     if text.strip() == '':
         raise TypeError("A text is required to get its emotion")
