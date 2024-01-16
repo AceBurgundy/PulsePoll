@@ -1,6 +1,4 @@
 from flask import render_template, Blueprint
-from Engine.models import Candidate
-from typing import List
 
 index: Blueprint = Blueprint('index', __name__, template_folder='templates/index', static_folder='static/index')
 
