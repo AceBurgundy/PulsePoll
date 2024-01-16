@@ -3,6 +3,9 @@ from wtforms import StringField, TextAreaField
 from flask_wtf import FlaskForm
 
 class CommentForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    username = StringField('Username')
-    text = TextAreaField('Comment', validators=[DataRequired()])
+    """
+    A comment template using flaskform.
+    """
+    email: StringField = StringField('Email', validators=[DataRequired(), Email()])
+    username: StringField = StringField('Username')
+    text: TextAreaField = TextAreaField('Comment', validators=[DataRequired()])
