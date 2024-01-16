@@ -10,7 +10,7 @@ from flask import Flask
 app: Flask = create_app()
 with app.app_context():
 
-    dataset_path: str = "D:\\Programming\\Projects\\Flask-Vanilla\\PulsePoll\\Engine\\candidate\\combined.csv"
+    dataset_path: str = "Enter path to combined.csv here"
     dataset: DataFrame = read_csv(dataset_path, encoding='latin')
 
     dataset["Translated"]: Series = dataset["Translated"].apply(process_text)
