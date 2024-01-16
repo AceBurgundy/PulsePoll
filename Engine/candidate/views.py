@@ -1,5 +1,4 @@
-from flask import current_app, jsonify, render_template, Blueprint, request, url_for
-from flask_socketio import emit
+from flask import jsonify, render_template, Blueprint, request, url_for
 from Engine.candidate.forms import CommentForm
 from Engine.text_processor import process_text
 from werkzeug.datastructures import MultiDict
@@ -8,8 +7,7 @@ from Engine.translator import translate
 from Engine.emotion import get_emotion
 from typing import Dict, List, Union
 from Engine import db, socketio
-import asyncio
-import json
+from flask_socketio import emit
 
 candidate: Blueprint = Blueprint('candidate', __name__, template_folder='templates/candidate', static_folder='static/candidate')
 
@@ -43,7 +41,7 @@ def get_candidates():
     Retrieves all candidates
     """
     candidates: List[Candidate] = Candidate.query.all()
-    data = []
+    data: DICT_TYPE = []
 
     for candidate in candidates:
         data.append({
@@ -86,36 +84,36 @@ def comment():
 
     comment_form: CommentForm = CommentForm(form_data)
 
-    if comment_form.validate():
-        email: str = comment_form.email.data
-        username: str = comment_form.username.data
-        text: str = comment_form.text.data
-
-        translated_text: str = translate(text)
-        processed_text: str = process_text(translated_text)
-        emotion_label: str = get_emotion(processed_text)
-
-        comment_data: DICT_TYPE = {
-            'user_email': email,
-            'username': username,
-            'text': text,
-            'emotion': emotion_label,
-            'candidate_id': candidate_id
-        }
-
-        comment: Comment = Comment(**comment_data)
-
-        db.session.add(comment)
-        db.session.commit()
-
-        socketio.emit('rankings_updated', comment_data)
-
-        return jsonify({
-            'status': 'success',
-            'message': 'Comment saved',
-            'commentId': comment.id,
-            'emotion': emotion_label
-        })
-    else:
+    if not comment_form.validate():
         return jsonify({'status': 'error', 'errors': comment_form.errors})
+
+    email: str = comment_form.email.data
+    username: str = comment_form.username.data
+    text: str = comment_form.text.data
+
+    translated_text: str = translate(text)
+    processed_text: str = process_text(translated_text)
+    emotion_label: str = get_emotion(processed_text)
+
+    comment_data: DICT_TYPE = {
+        'user_email': email,
+        'username': username,
+        'text': text,
+        'emotion': emotion_label,
+        'candidate_id': candidate_id
+    }
+
+    comment: Comment = Comment(**comment_data)
+
+    db.session.add(comment)
+    db.session.commit()
+
+    socketio.emit('rankings_updated', comment_data)
+
+    return jsonify({
+        'status': 'success',
+        'message': 'Comment saved',
+        'commentId': comment.id,
+        'emotion': emotion_label
+    })
 
