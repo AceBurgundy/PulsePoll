@@ -8,7 +8,7 @@ from Engine.emotion import *
 app = create_app()
 with app.app_context():
 
-    dataset_path: str = ""
+    dataset_path: str = "Enter path to combined.csv here"
     dataset: DataFrame = read_csv(dataset_path, encoding='latin')
 
     dataset["Translated"]: Series = dataset["Translated"].apply(process_text)
