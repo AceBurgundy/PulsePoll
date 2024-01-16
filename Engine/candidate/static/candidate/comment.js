@@ -1,5 +1,5 @@
-import makeToastNotification from "../../../static/toast.js";
 import generateNewComment from "../../../static/comment-generator.js";
+import makeToastNotification from "../../../static/toast.js";
 import {socket} from "../../../static/socket.js";
 
 const commentForm = document.getElementById('comment-form');

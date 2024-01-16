@@ -79,4 +79,4 @@ class Comment(db.Model):
         --------
             the (str) Comment object.
         """
-        return f"Comment('{self.text}', '{self.date_posted}')"
+        return f"Comment('{self.text}', '{self.date_time_posted}')"

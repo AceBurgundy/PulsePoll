@@ -6,6 +6,17 @@ db = SQLAlchemy()
 socketio = SocketIO()
 
 def create_app():
+    """
+    Creates and configures an instance of the Flask application.
+
+    This function initializes the Flask application, sets up the configuration,
+    initializes the database and socketio, and registers the blueprints for the
+    index, candidate, and error views.
+
+    Returns:
+    --------
+        app: A Flask application instance.
+    """
 
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "02acf27fea4d3asdasdfasfde325232345wetg4qbg43c002a063da2e71cf56e866be904fd5467670b99efa8a5d035a1"

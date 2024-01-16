@@ -4,11 +4,13 @@ from Engine.models import Candidate, Comment
 from Engine import create_app, db
 from datetime import datetime
 from Engine.emotion import *
+from typing import Union
+from flask import Flask
 
-app = create_app()
+app: Flask = create_app()
 with app.app_context():
 
-    dataset_path: str = "D:\Programming\Projects\Flask-Vanilla\AI-Presidential-Election-Sentiment-Analyzer\Engine\candidate\combined.csv"
+    dataset_path: str = "D:\\Programming\\Projects\\Flask-Vanilla\\PulsePoll\\Engine\\candidate\\combined.csv"
     dataset: DataFrame = read_csv(dataset_path, encoding='latin')
 
     dataset["Translated"]: Series = dataset["Translated"].apply(process_text)
@@ -33,7 +35,7 @@ with app.app_context():
 
             db.session.add(candidate)
 
-        date_time_posted = None
+        date_time_posted: Union[datetime, bool] = None
         has_date: bool = notnull(row["Date"])
         has_time: bool = notnull(row["Time"])
 
@@ -47,7 +49,7 @@ with app.app_context():
             date_str: str = f"{row['Time']}"
             date_time_posted: datetime = datetime.strptime(date_str, '%I:%M %p')
         else:
-            date_time_posted = None
+            date_time_posted: bool = None
 
         if "Comments" in row and row["Comments"]:
             text: str = row["Comments"]

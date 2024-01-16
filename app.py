@@ -4,7 +4,6 @@ from flask import Flask
 app: Flask = create_app()
 
 if __name__ == '__main__':
-    app.debug = True
     socketio.run(app, port=8080)
 
     # if you are seeing this problem;

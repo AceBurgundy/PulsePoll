@@ -69,7 +69,7 @@ def remove_frequent_words(text: str) -> str:
 
 def remove_rare_words(text: str) -> str:
     """
-    Removes the top N rare words from the input text.
+    Removes the rare words from the input text.
 
     Parameters:
     -----------
