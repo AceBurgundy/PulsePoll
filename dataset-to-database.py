@@ -8,7 +8,7 @@ from Engine.emotion import *
 app = create_app()
 with app.app_context():
 
-    dataset_path: str = "D:\Programming\Projects\Flask-Vanilla\AI-Presidential-Election-Sentiment-Analyzer\Engine\candidate\combined.csv"
+    dataset_path: str = ""
     dataset: DataFrame = read_csv(dataset_path, encoding='latin')
 
     dataset["Translated"]: Series = dataset["Translated"].apply(process_text)
