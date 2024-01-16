@@ -10,6 +10,7 @@ from Engine import db, socketio
 from flask_socketio import emit
 
 candidate: Blueprint = Blueprint('candidate', __name__, template_folder='templates/candidate', static_folder='static/candidate')
+DICT_TYPE = Dict[str, Union[str, int]]
 
 @socketio.on('get_highest_rated_candidate')
 def broadcast_highest_rated_candidate():
@@ -17,21 +18,21 @@ def broadcast_highest_rated_candidate():
     highest_rated_candidate: Union[DICT_TYPE, None] = None
 
     for candidate in candidates:
-        rating = candidate.get_rating()
-        positive_rating = rating.get('POSITIVE', 0)
+        rating: Dict[str, int] = candidate.get_rating()
+        positive_rating: int = rating.get('POSITIVE', 0)
 
-        candidate_data = {
+        candidate_data: DICT_TYPE = {
             'id': candidate.id,
             'name': candidate.name,
             'positive_ratings': positive_rating,
         }
 
         if highest_rated_candidate is None:
-            highest_rated_candidate = candidate_data
+            highest_rated_candidate: Union[DICT_TYPE, None] = candidate_data
             continue
 
         if candidate_data['positive_ratings'] > highest_rated_candidate['positive_ratings']:
-            highest_rated_candidate = candidate_data
+            highest_rated_candidate: Union[DICT_TYPE, None] = candidate_data
 
     emit('highest_rated_candidate', highest_rated_candidate, broadcast=True)
 
@@ -72,8 +73,6 @@ def get_candidate(candidate_id):
         candidate=candidate,
         comment_form=comment_form
     )
-
-DICT_TYPE = Dict[str, Union[str, int]]
 
 @candidate.post("/comment")
 def comment():
